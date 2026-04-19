@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ensae-mlops
+spec:
+  project: default
+  source:
+1    repoURL: https://github.com/kellybourbon2/loan-prediction-approval-deployment.git
+2    targetRevision: main
+3    path: deployment
+  destination:
+    server: https://kubernetes.default.svc
+4    namespace: user-kbourbon
+  syncPolicy:
+    automated:
+      selfHeal: true
