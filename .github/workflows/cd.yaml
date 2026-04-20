@@ -6,6 +6,11 @@ jobs:
   healthcheck:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Wait for ArgoCD to sync
         run: sleep 60
       - name: Healthcheck
@@ -20,7 +25,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch --depth=2
           git checkout HEAD~1 -- deployment/deployment.yaml
           git add deployment/deployment.yaml
           git commit -m "ci: rollback — healthcheck failed"
