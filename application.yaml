@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ensae-mlops
+  name: loan-api
 spec:
   project: default
   source:
